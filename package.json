@@ -1,0 +1,11 @@
+{
+  "name": "flowers",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "serve .",
+    "build": "echo done"
+  },
+  "dependencies": {
+    "serve": "^14.0.0"
+  }
+}
