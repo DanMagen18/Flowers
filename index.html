@@ -1,1665 +1,427 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>פרחי גן עדן | זרים מעוצבים • משלוח ביום ההזמנה</title>
-<meta name="description" content="זרים מעוצבים בידיים, פרחים טריים, משלוח ביום ההזמנה. החל מ-₪179.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Noto+Serif+Hebrew:wght@300;400;600;700&family=Assistant:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-<style>
-/* ═══════════════════════════════════════════
-   VARIABLES & RESET
-═══════════════════════════════════════════ */
-:root {
-  --crimson:      #8B0000;
-  --crimson-mid:  #A52020;
-  --crimson-soft: #C0392B;
-  --crimson-pale: #f5e0e0;
-  --cream:        #fdf8f3;
-  --cream-dark:   #f5ede2;
-  --gold:         #c9a84c;
-  --gold-light:   #e8d5a3;
-  --dark:         #1a0a0a;
-  --muted:        #7a5a5a;
-  --white:        #ffffff;
-  --border:       rgba(139,0,0,0.12);
-  --shadow-sm:    0 4px 20px rgba(139,0,0,0.08);
-  --shadow-md:    0 12px 48px rgba(139,0,0,0.14);
-  --shadow-lg:    0 24px 80px rgba(139,0,0,0.2);
-  --radius-sm:    12px;
-  --radius-md:    24px;
-  --radius-lg:    40px;
-  --transition:   0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { scroll-behavior: smooth; font-size: 16px; }
-
-body {
-  font-family: 'Assistant', 'Noto Serif Hebrew', sans-serif;
-  background: var(--cream);
-  color: var(--dark);
-  direction: rtl;
-  overflow-x: hidden;
-  line-height: 1.6;
-}
-
-img { display: block; max-width: 100%; }
-a  { text-decoration: none; color: inherit; }
-ul { list-style: none; }
-
-/* ═══════════════════════════════════════════
-   TYPOGRAPHY HELPERS
-═══════════════════════════════════════════ */
-.serif {
-  font-family: 'Cormorant Garamond', 'Noto Serif Hebrew', serif;
-}
-
-/* ═══════════════════════════════════════════
-   SCROLLBAR
-═══════════════════════════════════════════ */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--cream); }
-::-webkit-scrollbar-thumb { background: var(--crimson-soft); border-radius: 10px; }
-
-/* ═══════════════════════════════════════════
-   NAV
-═══════════════════════════════════════════ */
-.nav {
-  position: fixed; top: 0; right: 0; left: 0;
-  z-index: 1000;
-  padding: 0 5%;
-  height: 72px;
-  display: flex; align-items: center; justify-content: space-between;
-  transition: background var(--transition), box-shadow var(--transition);
-}
-.nav.scrolled {
-  background: rgba(253, 248, 243, 0.96);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 2px 24px rgba(139,0,0,0.08);
-}
-
-.nav-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--white);
-  letter-spacing: 0.02em;
-  transition: color var(--transition);
-  display: flex; align-items: center; gap: 0.5rem;
-}
-.nav-logo span { color: var(--gold-light); }
-.nav.scrolled .nav-logo { color: var(--dark); }
-.nav.scrolled .nav-logo span { color: var(--crimson); }
-
-.nav-links {
-  display: flex; gap: 2rem; align-items: center;
-}
-.nav-links a {
-  font-size: 0.9rem; font-weight: 500;
-  color: rgba(255,255,255,0.85);
-  transition: color var(--transition);
-  position: relative;
-}
-.nav-links a::after {
-  content: ''; position: absolute; bottom: -3px; right: 0;
-  width: 0; height: 1.5px;
-  background: var(--gold-light);
-  transition: width var(--transition);
-}
-.nav-links a:hover { color: var(--white); }
-.nav-links a:hover::after { width: 100%; }
-.nav.scrolled .nav-links a { color: var(--muted); }
-.nav.scrolled .nav-links a::after { background: var(--crimson); }
-.nav.scrolled .nav-links a:hover { color: var(--dark); }
-
-.nav-cta {
-  background: var(--crimson) !important;
-  color: white !important;
-  padding: 0.55rem 1.4rem !important;
-  border-radius: 30px !important;
-  font-weight: 600 !important;
-  font-size: 0.88rem !important;
-  transition: all var(--transition) !important;
-  box-shadow: 0 4px 20px rgba(139,0,0,0.35) !important;
-}
-.nav-cta:hover { background: #6B0000 !important; transform: translateY(-1px) !important; }
-.nav-cta::after { display: none !important; }
-
-.hamburger {
-  display: none;
-  flex-direction: column; gap: 5px;
-  cursor: pointer; padding: 4px;
-  background: none; border: none;
-}
-.hamburger span {
-  display: block; width: 24px; height: 2px;
-  background: white;
-  border-radius: 2px;
-  transition: var(--transition);
-}
-.nav.scrolled .hamburger span { background: var(--dark); }
-.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-.mobile-menu {
-  display: none;
-  position: fixed; top: 72px; right: 0; left: 0;
-  background: rgba(253, 248, 243, 0.98);
-  backdrop-filter: blur(20px);
-  padding: 1.5rem 5%;
-  flex-direction: column; gap: 1rem;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-  z-index: 999;
-  transform: translateY(-10px);
-  opacity: 0;
-  transition: var(--transition);
-}
-.mobile-menu.open {
-  display: flex;
-  transform: translateY(0);
-  opacity: 1;
-}
-.mobile-menu a {
-  font-size: 1.05rem; font-weight: 500;
-  color: var(--dark); padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
-/* ═══════════════════════════════════════════
-   HERO
-═══════════════════════════════════════════ */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex; align-items: center; justify-content: flex-end;
-  padding: 0 6% 0 0;
-  overflow: hidden;
-  background: var(--dark);
-}
-
-/* Video/Image container — swap src to add video later */
-.hero-bg {
-  position: absolute; inset: 0;
-  z-index: 0;
-}
-.hero-bg-img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: 0.45;
-}
-/* When you have a video, replace the img with:
-   <video autoplay muted loop playsinline class="hero-bg-img">
-     <source src="bouquet.mp4" type="video/mp4">
-   </video>
-*/
-
-.hero-overlay {
-  position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(
-    115deg,
-    rgba(26,10,10,0.92) 0%,
-    rgba(26,10,10,0.65) 45%,
-    rgba(139,0,0,0.25) 100%
-  );
-}
-
-.hero-deco-line {
-  position: absolute; top: 0; left: 50%;
-  width: 1px; height: 100%;
-  background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.18), transparent);
-  z-index: 1; pointer-events: none;
-}
-
-.hero-content {
-  position: relative; z-index: 2;
-  max-width: 600px;
-}
-
-.hero-eyebrow {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  background: rgba(201,168,76,0.12);
-  border: 1px solid rgba(201,168,76,0.35);
-  color: var(--gold-light);
-  padding: 0.4rem 1.1rem; border-radius: 30px;
-  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 1.8rem;
-  opacity: 0; transform: translateY(20px);
-}
-.hero-eyebrow .dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--gold); flex-shrink: 0;
-}
-
-.hero-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.8rem, 5.5vw, 5rem);
-  font-weight: 600;
-  line-height: 1.12;
-  color: var(--white);
-  margin-bottom: 1.5rem;
-  opacity: 0; transform: translateY(30px);
-}
-.hero-title em {
-  font-style: italic;
-  color: var(--gold-light);
-  display: block;
-}
-
-.hero-sub {
-  font-size: 1.05rem;
-  color: rgba(255,255,255,0.65);
-  line-height: 1.75;
-  margin-bottom: 2.5rem;
-  max-width: 440px;
-  font-weight: 300;
-  opacity: 0; transform: translateY(20px);
-}
-
-.hero-actions {
-  display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap;
-  opacity: 0; transform: translateY(20px);
-}
-
-.btn-crimson {
-  background: var(--crimson);
-  color: white; border: none;
-  padding: 0.9rem 2.2rem; border-radius: 50px;
-  font-size: 1rem; font-weight: 600;
-  cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;
-  transition: all var(--transition);
-  box-shadow: 0 8px 32px rgba(139,0,0,0.4);
-  letter-spacing: 0.02em;
-}
-.btn-crimson:hover {
-  background: #6B0000;
-  transform: translateY(-3px);
-  box-shadow: 0 14px 48px rgba(139,0,0,0.5);
-}
-
-.btn-ghost {
-  color: rgba(255,255,255,0.8);
-  font-weight: 500; font-size: 0.95rem;
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  border-bottom: 1px solid rgba(255,255,255,0.25);
-  padding-bottom: 2px;
-  transition: all var(--transition);
-}
-.btn-ghost:hover { color: var(--gold-light); border-color: var(--gold-light); gap: 0.8rem; }
-
-.hero-stats {
-  display: flex; gap: 2.5rem; margin-top: 3.5rem; flex-wrap: wrap;
-  opacity: 0; transform: translateY(20px);
-}
-.hero-stat { text-align: center; }
-.hero-stat-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem; font-weight: 700;
-  color: var(--gold-light); line-height: 1;
-}
-.hero-stat-label {
-  font-size: 0.75rem; color: rgba(255,255,255,0.5);
-  font-weight: 400; margin-top: 0.25rem;
-  letter-spacing: 0.05em;
-}
-.hero-stat-divider {
-  width: 1px; background: rgba(255,255,255,0.12);
-  align-self: stretch; min-height: 40px;
-}
-
-.hero-scroll {
-  position: absolute; bottom: 2.5rem; left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-  color: rgba(255,255,255,0.4); font-size: 0.72rem; letter-spacing: 0.1em;
-  text-transform: uppercase;
-  animation: scrollBounce 2s ease-in-out infinite;
-}
-.hero-scroll-line {
-  width: 1px; height: 50px;
-  background: linear-gradient(to bottom, rgba(201,168,76,0.6), transparent);
-}
-
-@keyframes scrollBounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(6px); }
-}
-
-/* ═══════════════════════════════════════════
-   SECTION COMMONS
-═══════════════════════════════════════════ */
-section { padding: 100px 5%; }
-
-.section-label {
-  text-align: center; margin-bottom: 0.6rem;
-  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em;
-  color: var(--crimson); text-transform: uppercase;
-}
-.section-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-weight: 600;
-  text-align: center; margin-bottom: 0.8rem;
-  color: var(--dark); line-height: 1.2;
-}
-.section-sub {
-  text-align: center; color: var(--muted); font-size: 1rem;
-  max-width: 520px; margin: 0 auto 4rem;
-  line-height: 1.75; font-weight: 300;
-}
-.section-divider {
-  display: flex; align-items: center; justify-content: center;
-  gap: 1rem; margin-bottom: 1rem;
-}
-.section-divider span {
-  width: 40px; height: 1px;
-  background: linear-gradient(to left, transparent, var(--crimson));
-}
-.section-divider span:first-child {
-  background: linear-gradient(to right, transparent, var(--crimson));
-}
-.section-divider .rose { font-size: 0.85rem; color: var(--crimson); }
-
-/* reveal animations */
-.reveal {
-  opacity: 0; transform: translateY(40px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-left {
-  opacity: 0; transform: translateX(40px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal-left.visible { opacity: 1; transform: translateX(0); }
-.reveal-right {
-  opacity: 0; transform: translateX(-40px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal-right.visible { opacity: 1; transform: translateX(0); }
-
-/* ═══════════════════════════════════════════
-   MARQUEE STRIP
-═══════════════════════════════════════════ */
-.marquee-strip {
-  background: var(--crimson);
-  overflow: hidden;
-  padding: 14px 0;
-  display: flex;
-}
-.marquee-track {
-  display: flex; gap: 0;
-  animation: marquee 20s linear infinite;
-  white-space: nowrap;
-}
-.marquee-track span {
-  color: rgba(255,255,255,0.9);
-  font-size: 0.82rem; font-weight: 500;
-  letter-spacing: 0.06em;
-  padding: 0 2rem;
-}
-.marquee-track .dot-sep {
-  color: var(--gold-light); font-size: 1rem;
-  padding: 0;
-}
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-/* ═══════════════════════════════════════════
-   SHOWCASE — SCROLL ANIMATION
-═══════════════════════════════════════════ */
-.showcase {
-  background: var(--dark);
-  padding: 120px 5%;
-  position: relative;
-  overflow: hidden;
-}
-.showcase::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--crimson), transparent);
-}
-.showcase::after {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--gold), transparent);
-}
-
-.showcase-label { color: var(--gold-light) !important; }
-.showcase-title { color: var(--white) !important; }
-.showcase-sub   { color: rgba(255,255,255,0.5) !important; }
-
-.showcase-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: center;
-  max-width: 1100px; margin: 0 auto;
-}
-.showcase-grid.reverse { direction: ltr; }
-.showcase-grid.reverse > * { direction: rtl; }
-
-.showcase-visual {
-  position: relative;
-}
-.showcase-img-wrap {
-  position: relative;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  aspect-ratio: 4/5;
-  background: #2a1010;
-}
-.showcase-img-placeholder {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 1rem;
-  background: linear-gradient(135deg, #1a0a0a 0%, #2d1010 50%, #1a0505 100%);
-}
-.showcase-img-placeholder .flower-icon {
-  font-size: 5rem;
-  filter: drop-shadow(0 0 30px rgba(139,0,0,0.6));
-  animation: float 4s ease-in-out infinite;
-}
-.showcase-img-placeholder p {
-  font-size: 0.8rem; color: rgba(255,255,255,0.25);
-  font-style: italic;
-}
-
-.showcase-badge {
-  position: absolute; bottom: -16px; right: -16px;
-  background: var(--crimson);
-  color: white;
-  padding: 1rem 1.4rem;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-md);
-  text-align: center;
-}
-.showcase-badge strong {
-  display: block; font-size: 1.4rem;
-  font-family: 'Cormorant Garamond', serif;
-}
-.showcase-badge span { font-size: 0.72rem; opacity: 0.75; }
-
-.showcase-text {}
-.showcase-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 5rem; font-weight: 300;
-  color: rgba(201,168,76,0.15);
-  line-height: 1; margin-bottom: -0.5rem;
-  display: block;
-}
-.showcase-text h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-  font-weight: 600;
-  color: var(--white);
-  margin-bottom: 1rem;
-}
-.showcase-text p {
-  font-size: 0.95rem;
-  color: rgba(255,255,255,0.55);
-  line-height: 1.8; margin-bottom: 1.5rem;
-}
-.showcase-tags {
-  display: flex; gap: 0.6rem; flex-wrap: wrap;
-}
-.showcase-tag {
-  background: rgba(139,0,0,0.25);
-  border: 1px solid rgba(139,0,0,0.4);
-  color: rgba(255,255,255,0.7);
-  padding: 0.3rem 0.9rem; border-radius: 20px;
-  font-size: 0.78rem;
-}
-
-/* ═══════════════════════════════════════════
-   WHY US
-═══════════════════════════════════════════ */
-.why-us { background: var(--cream); }
-
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 2rem;
-  max-width: 1100px; margin: 0 auto;
-}
-
-.why-card {
-  background: var(--white);
-  border-radius: var(--radius-md);
-  padding: 2.5rem 2rem;
-  text-align: center;
-  border: 1.5px solid var(--border);
-  transition: all var(--transition);
-  position: relative; overflow: hidden;
-}
-.why-card::before {
-  content: '';
-  position: absolute; top: 0; right: 0; left: 0;
-  height: 3px;
-  background: linear-gradient(to right, var(--crimson), var(--gold));
-  transform: scaleX(0); transform-origin: right;
-  transition: transform var(--transition);
-}
-.why-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-md);
-  border-color: transparent;
-}
-.why-card:hover::before { transform: scaleX(1); }
-
-.why-icon {
-  width: 64px; height: 64px; border-radius: 50%;
-  background: var(--crimson-pale);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.8rem;
-  margin: 0 auto 1.5rem;
-  transition: all var(--transition);
-}
-.why-card:hover .why-icon {
-  background: var(--crimson);
-  transform: scale(1.1);
-}
-
-.why-card h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem; font-weight: 600;
-  color: var(--dark); margin-bottom: 0.6rem;
-}
-.why-card p {
-  font-size: 0.88rem; color: var(--muted);
-  line-height: 1.7;
-}
-
-/* ═══════════════════════════════════════════
-   CATEGORIES
-═══════════════════════════════════════════ */
-.categories { background: var(--white); }
-
-.cat-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  max-width: 1100px; margin: 0 auto;
-}
-
-.cat-card {
-  position: relative;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  aspect-ratio: 3/4;
-  cursor: pointer;
-  group: true;
-  transition: transform var(--transition);
-  background: var(--cream-dark);
-}
-.cat-card:hover { transform: translateY(-6px) scale(1.01); }
-
-.cat-bg {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 5rem;
-  transition: transform var(--transition);
-}
-.cat-card:hover .cat-bg { transform: scale(1.1); }
-
-.cat-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(26,10,10,0.85) 0%, rgba(26,10,10,0.2) 50%, transparent 100%);
-  transition: background var(--transition);
-}
-.cat-card:hover .cat-overlay {
-  background: linear-gradient(to top, rgba(139,0,0,0.85) 0%, rgba(139,0,0,0.3) 50%, transparent 100%);
-}
-
-.cat-info {
-  position: absolute; bottom: 0; right: 0; left: 0;
-  padding: 1.5rem 1.2rem;
-}
-.cat-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem; font-weight: 600;
-  color: white; display: block; margin-bottom: 0.25rem;
-}
-.cat-count {
-  font-size: 0.78rem; color: rgba(255,255,255,0.6);
-}
-.cat-arrow {
-  position: absolute; top: 1.2rem; left: 1.2rem;
-  width: 32px; height: 32px; border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  display: flex; align-items: center; justify-content: center;
-  color: white; font-size: 0.85rem;
-  opacity: 0; transform: scale(0.7);
-  transition: var(--transition);
-}
-.cat-card:hover .cat-arrow {
-  opacity: 1; transform: scale(1);
-  background: var(--crimson);
-  border-color: var(--crimson);
-}
-
-/* ═══════════════════════════════════════════
-   DELIVERY SECTION
-═══════════════════════════════════════════ */
-.delivery {
-  background: var(--crimson);
-  position: relative; overflow: hidden;
-}
-.delivery::before {
-  content: '';
-  position: absolute; top: -50%; right: -20%;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
-  border-radius: 50%; pointer-events: none;
-}
-.delivery::after {
-  content: '';
-  position: absolute; bottom: -30%; left: -10%;
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(0,0,0,0.15) 0%, transparent 70%);
-  border-radius: 50%; pointer-events: none;
-}
-
-.delivery-inner {
-  position: relative; z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem; align-items: center;
-  max-width: 1100px; margin: 0 auto;
-}
-
-.delivery-text h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-weight: 600;
-  color: white; margin-bottom: 1rem; line-height: 1.2;
-}
-.delivery-text h2 em { font-style: italic; color: var(--gold-light); }
-.delivery-text p {
-  color: rgba(255,255,255,0.7);
-  font-size: 1rem; line-height: 1.75; margin-bottom: 2rem;
-}
-
-.delivery-features {
-  display: flex; flex-direction: column; gap: 1rem;
-  margin-bottom: 2.5rem;
-}
-.delivery-feature {
-  display: flex; align-items: center; gap: 1rem;
-}
-.delivery-feature-icon {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1rem; flex-shrink: 0;
-}
-.delivery-feature-text strong {
-  display: block; color: white; font-size: 0.92rem; font-weight: 600;
-}
-.delivery-feature-text span {
-  font-size: 0.8rem; color: rgba(255,255,255,0.55);
-}
-
-.btn-white {
-  background: white; color: var(--crimson);
-  padding: 0.9rem 2.2rem; border-radius: 50px;
-  font-size: 1rem; font-weight: 600;
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  transition: all var(--transition);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-}
-.btn-white:hover {
-  background: var(--cream); transform: translateY(-3px);
-  box-shadow: 0 14px 48px rgba(0,0,0,0.2);
-}
-
-.delivery-card {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: var(--radius-md);
-  padding: 2.5rem;
-  display: flex; flex-direction: column; gap: 1.5rem;
-}
-.delivery-step {
-  display: flex; align-items: center; gap: 1.2rem;
-}
-.delivery-step-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.5rem; font-weight: 300;
-  color: rgba(255,255,255,0.2);
-  line-height: 1; min-width: 2.5rem;
-}
-.delivery-step-content strong {
-  display: block; color: white; font-size: 0.95rem; font-weight: 600;
-  margin-bottom: 0.2rem;
-}
-.delivery-step-content span {
-  font-size: 0.82rem; color: rgba(255,255,255,0.5);
-}
-.delivery-step-line {
-  height: 1px; background: rgba(255,255,255,0.1); margin: 0;
-}
-
-/* ═══════════════════════════════════════════
-   GALLERY
-═══════════════════════════════════════════ */
-.gallery { background: var(--cream-dark); }
-
-.gallery-masonry {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 200px;
-  gap: 1rem;
-  max-width: 1200px; margin: 0 auto;
-}
-.gallery-item {
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  position: relative;
-  background: var(--crimson-pale);
-  cursor: pointer;
-  transition: transform var(--transition);
-}
-.gallery-item:hover { transform: scale(1.02); z-index: 1; }
-.gallery-item.tall   { grid-row: span 2; }
-.gallery-item.wide   { grid-column: span 2; }
-
-.gallery-inner {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, var(--crimson-pale), var(--cream-dark));
-  font-size: 3rem;
-  transition: transform var(--transition);
-}
-.gallery-item:hover .gallery-inner { transform: scale(1.05); }
-
-.gallery-overlay {
-  position: absolute; inset: 0;
-  background: rgba(139,0,0,0);
-  display: flex; align-items: center; justify-content: center;
-  transition: background var(--transition);
-}
-.gallery-overlay-icon {
-  color: white; font-size: 1.5rem;
-  opacity: 0; transform: scale(0.5);
-  transition: var(--transition);
-}
-.gallery-item:hover .gallery-overlay { background: rgba(139,0,0,0.3); }
-.gallery-item:hover .gallery-overlay-icon { opacity: 1; transform: scale(1); }
-
-/* ═══════════════════════════════════════════
-   WHATSAPP CTA
-═══════════════════════════════════════════ */
-.wa-section {
-  background: var(--dark);
-  text-align: center;
-  padding: 100px 5%;
-  position: relative; overflow: hidden;
-}
-.wa-section::before {
-  content: '';
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(139,0,0,0.3) 0%, transparent 65%);
-  pointer-events: none;
-}
-
-.wa-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.2rem, 4vw, 3.5rem);
-  font-weight: 600;
-  color: white; margin-bottom: 1rem; line-height: 1.2;
-  position: relative; z-index: 1;
-}
-.wa-title em { font-style: italic; color: var(--gold-light); }
-
-.wa-sub {
-  color: rgba(255,255,255,0.5); font-size: 1rem;
-  max-width: 480px; margin: 0 auto 2.5rem;
-  line-height: 1.75; position: relative; z-index: 1;
-}
-
-.btn-whatsapp {
-  display: inline-flex; align-items: center; gap: 0.8rem;
-  background: #25D366;
-  color: white; padding: 1rem 2.5rem; border-radius: 50px;
-  font-size: 1.05rem; font-weight: 600;
-  transition: all var(--transition);
-  box-shadow: 0 8px 32px rgba(37,211,102,0.3);
-  position: relative; z-index: 1;
-}
-.btn-whatsapp:hover {
-  background: #1dbb58; transform: translateY(-3px);
-  box-shadow: 0 14px 48px rgba(37,211,102,0.4);
-}
-.btn-whatsapp svg { width: 22px; height: 22px; fill: white; }
-
-.wa-trust {
-  display: flex; gap: 2rem; justify-content: center;
-  margin-top: 3rem; flex-wrap: wrap;
-  position: relative; z-index: 1;
-}
-.wa-trust-item {
-  display: flex; align-items: center; gap: 0.5rem;
-  color: rgba(255,255,255,0.4); font-size: 0.82rem;
-}
-.wa-trust-item span:first-child { color: var(--crimson-soft); }
-
-/* ═══════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════ */
-footer {
-  background: #0f0404;
-  padding: 60px 5% 30px;
-  border-top: 1px solid rgba(139,0,0,0.2);
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 3rem;
-  max-width: 1200px; margin: 0 auto 3rem;
-}
-
-.footer-brand {}
-.footer-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem; font-weight: 600;
-  color: white; margin-bottom: 1rem;
-}
-.footer-logo span { color: var(--gold-light); }
-.footer-brand p {
-  color: rgba(255,255,255,0.4); font-size: 0.88rem;
-  line-height: 1.75; max-width: 260px;
-}
-.footer-social {
-  display: flex; gap: 0.8rem; margin-top: 1.5rem;
-}
-.footer-social a {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
-  display: flex; align-items: center; justify-content: center;
-  color: rgba(255,255,255,0.5); font-size: 0.85rem;
-  transition: var(--transition);
-}
-.footer-social a:hover {
-  background: var(--crimson); border-color: var(--crimson); color: white;
-}
-
-.footer-col h4 {
-  font-family: 'Cormorant Garamond', serif;
-  color: white; font-size: 1.05rem; font-weight: 600;
-  margin-bottom: 1.2rem;
-}
-.footer-col ul li { margin-bottom: 0.6rem; }
-.footer-col ul a {
-  color: rgba(255,255,255,0.4); font-size: 0.88rem;
-  transition: color var(--transition);
-}
-.footer-col ul a:hover { color: var(--gold-light); }
-
-.footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.06);
-  padding-top: 1.5rem;
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 1rem;
-  max-width: 1200px; margin: 0 auto;
-}
-.footer-bottom p {
-  color: rgba(255,255,255,0.25); font-size: 0.8rem;
-}
-.footer-bottom a { color: var(--gold-light); }
-
-/* ═══════════════════════════════════════════
-   STICKY WHATSAPP BUTTON
-═══════════════════════════════════════════ */
-.wa-sticky {
-  position: fixed; bottom: 2rem; left: 2rem;
-  z-index: 999;
-  width: 56px; height: 56px; border-radius: 50%;
-  background: #25D366;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 8px 32px rgba(37,211,102,0.4);
-  cursor: pointer;
-  transition: all var(--transition);
-  animation: waPulse 2.5s ease-in-out infinite;
-}
-.wa-sticky:hover {
-  transform: scale(1.12);
-  box-shadow: 0 12px 48px rgba(37,211,102,0.55);
-  animation: none;
-}
-.wa-sticky svg { width: 28px; height: 28px; fill: white; }
-.wa-tooltip {
-  position: absolute; left: 68px;
-  background: var(--dark); color: white;
-  padding: 0.4rem 0.9rem; border-radius: 8px;
-  font-size: 0.8rem; white-space: nowrap;
-  opacity: 0; transform: translateX(-8px);
-  transition: var(--transition); pointer-events: none;
-}
-.wa-sticky:hover .wa-tooltip { opacity: 1; transform: translateX(0); }
-
-@keyframes waPulse {
-  0%, 100% { box-shadow: 0 8px 32px rgba(37,211,102,0.4); }
-  50%       { box-shadow: 0 8px 48px rgba(37,211,102,0.65), 0 0 0 12px rgba(37,211,102,0.08); }
-}
-
-/* ═══════════════════════════════════════════
-   TOAST
-═══════════════════════════════════════════ */
-.toast {
-  position: fixed; bottom: 2rem; right: 2rem;
-  background: var(--dark); color: white;
-  padding: 1rem 1.5rem; border-radius: var(--radius-sm);
-  font-size: 0.9rem;
-  transform: translateY(20px); opacity: 0;
-  transition: var(--transition); pointer-events: none;
-  z-index: 2000;
-  box-shadow: var(--shadow-md);
-  border-right: 3px solid var(--crimson);
-}
-.toast.show { transform: translateY(0); opacity: 1; }
-
-/* ═══════════════════════════════════════════
-   FLOAT ANIMATION
-═══════════════════════════════════════════ */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-10px); }
-}
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ═══════════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════════ */
-@media (max-width: 1024px) {
-  .showcase-grid { gap: 3rem; }
-  .delivery-inner { gap: 3rem; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .gallery-masonry { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .hamburger { display: flex; }
-  section { padding: 70px 5%; }
-
-  .hero {
-    justify-content: center; padding: 0 5%;
-    text-align: center;
-  }
-  .hero-content { max-width: 100%; }
-  .hero-eyebrow { margin: 0 auto 1.5rem; }
-  .hero-sub { max-width: 100%; }
-  .hero-actions { justify-content: center; }
-  .hero-stats { justify-content: center; }
-  .hero-stat-divider { min-height: 30px; }
-
-  .showcase-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-  .showcase-grid.reverse { direction: rtl; }
-
-  .delivery-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-  .cat-grid { grid-template-columns: repeat(2, 1fr); }
-
-  .gallery-masonry {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 150px;
-  }
-  .gallery-item.wide { grid-column: span 1; }
-
-  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .footer-bottom { flex-direction: column; text-align: center; }
-
-  .wa-sticky { bottom: 1.5rem; left: 1.5rem; }
-}
-
-@media (max-width: 480px) {
-  .hero-title { font-size: 2.4rem; }
-  .cat-grid { grid-template-columns: 1fr 1fr; }
-  .gallery-masonry { grid-template-columns: repeat(2, 1fr); }
-  .hero-stats { gap: 1.5rem; }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bloom Rouge | חנות פרחים יוקרתית</title>
+  <meta
+    name="description"
+    content="חנות פרחים יוקרתית עם זרי פרימיום, משלוחים מהיום להיום והזמנה מהירה בוואטסאפ."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-<!-- ═══════ NAV ═══════ -->
-<nav class="nav" id="nav">
-  <a href="#" class="nav-logo">פרחי<span>גן עדן</span></a>
-  <ul class="nav-links">
-    <li><a href="#showcase">הקולקציה</a></li>
-    <li><a href="#categories">קטגוריות</a></li>
-    <li><a href="#delivery">משלוחים</a></li>
-    <li><a href="#gallery">גלריה</a></li>
-    <li><a href="https://wa.me/972506286548" target="_blank" class="nav-cta">הזמינו עכשיו</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="תפריט">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#showcase"    onclick="toggleMenu()">הקולקציה</a>
-  <a href="#categories"  onclick="toggleMenu()">קטגוריות</a>
-  <a href="#delivery"    onclick="toggleMenu()">משלוחים</a>
-  <a href="#gallery"     onclick="toggleMenu()">גלריה</a>
-  <a href="https://wa.me/972506286548" target="_blank" onclick="toggleMenu()">הזמינו עכשיו 💬</a>
-</div>
-
-<!-- ═══════ HERO ═══════ -->
-<section class="hero" id="hero">
-  <!-- ★ להחליף את ה-img ב-video כשיהיה מוכן ★ -->
-  <div class="hero-bg">
-    <div class="hero-img-placeholder" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a0505 0%,#2d0808 40%,#3d1010 100%);">
-      <span style="font-size:12rem;opacity:0.18;filter:blur(2px);">🌹</span>
-    </div>
-  </div>
-  <div class="hero-overlay"></div>
-  <div class="hero-deco-line"></div>
-
-  <div class="hero-content">
-    <div class="hero-eyebrow" id="heroEyebrow">
-      <span class="dot"></span>
-      זרים מעוצבים בידיים • משלוח ביום ההזמנה
-      <span class="dot"></span>
-    </div>
-
-    <h1 class="hero-title" id="heroTitle">
-      כי כל רגע<br>
-      <em>ראוי לפרוח</em>
-    </h1>
-
-    <p class="hero-sub" id="heroSub">
-      זרים יוקרתיים מפרחים טריים, מעוצבים בלב ובידיים. 
-      מהמשתלה אל דלתכם — תוך שעות.
-    </p>
-
-    <div class="hero-actions" id="heroActions">
-      <a href="https://wa.me/972506286548" target="_blank" class="btn-crimson">
-        🌹 הזמינו עכשיו
+  <header class="header" id="top">
+    <div class="container nav">
+      <a href="#top" class="logo">
+        <span class="logo-mark">✿</span>
+        <span class="logo-text">Bloom Rouge</span>
       </a>
-      <a href="#showcase" class="btn-ghost">
-        גלו את הקולקציה ←
-      </a>
-    </div>
 
-    <div class="hero-stats" id="heroStats">
-      <div class="hero-stat">
-        <div class="hero-stat-num">+4,200</div>
-        <div class="hero-stat-label">לקוחות מרוצים</div>
-      </div>
-      <div class="hero-stat-divider"></div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">100%</div>
-        <div class="hero-stat-label">פרחים טריים</div>
-      </div>
-      <div class="hero-stat-divider"></div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">3 שעות</div>
-        <div class="hero-stat-label">זמן משלוח</div>
-      </div>
-    </div>
-  </div>
+      <nav class="nav-links" id="navMenu">
+        <a href="#showcase">הזר המרכזי</a>
+        <a href="#why-us">למה אנחנו</a>
+        <a href="#categories">קטגוריות</a>
+        <a href="#delivery">משלוחים</a>
+        <a href="#gallery">גלריה</a>
+        <a href="#contact">הזמנה</a>
+      </nav>
 
-  <div class="hero-scroll">
-    <div class="hero-scroll-line"></div>
-    <span>גלול</span>
-  </div>
-</section>
+      <div class="nav-actions">
+        <a
+          class="btn btn-primary desktop-only"
+          href="https://wa.me/972501234567?text=היי,%20אני%20רוצה%20להזמין%20זר%20פרחים"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          להזמנה מהירה
+        </a>
 
-<!-- ═══════ MARQUEE ═══════ -->
-<div class="marquee-strip" aria-hidden="true">
-  <div class="marquee-track">
-    <span>משלוח ביום ההזמנה</span><span class="dot-sep">✦</span>
-    <span>זרים מעוצבים בידיים</span><span class="dot-sep">✦</span>
-    <span>פרחים טריים בלבד</span><span class="dot-sep">✦</span>
-    <span>מתנות ליום הולדת</span><span class="dot-sep">✦</span>
-    <span>חתונות ואירועים</span><span class="dot-sep">✦</span>
-    <span>עיצוב אישי ייחודי</span><span class="dot-sep">✦</span>
-    <span>משלוח ביום ההזמנה</span><span class="dot-sep">✦</span>
-    <span>זרים מעוצבים בידיים</span><span class="dot-sep">✦</span>
-    <span>פרחים טריים בלבד</span><span class="dot-sep">✦</span>
-    <span>מתנות ליום הולדת</span><span class="dot-sep">✦</span>
-    <span>חתונות ואירועים</span><span class="dot-sep">✦</span>
-    <span>עיצוב אישי ייחודי</span><span class="dot-sep">✦</span>
-  </div>
-</div>
+        <button class="menu-toggle" id="menuToggle" aria-label="פתח תפריט">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
 
-<!-- ═══════ SHOWCASE ═══════ -->
-<section class="showcase" id="showcase">
-  <div class="section-divider reveal">
-    <span></span><span class="rose">✦</span><span></span>
-  </div>
-  <p class="section-label showcase-label reveal">הקולקציה שלנו</p>
-  <h2 class="section-title showcase-title reveal">אמנות של פרחים</h2>
-  <p class="section-sub showcase-sub reveal">כל זר הוא יצירת מופת. אנחנו בוחרים את הפרחים הטובים ביותר ומעצבים כל זר בנשמה.</p>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">חנות פרחים בעיצוב פרימיום</p>
+          <h1>
+            פרחים שנראים
+            <span>יקרים מהרגע הראשון</span>
+          </h1>
+          <p class="hero-text">
+            זרי ורדים, סידורי פרחים ומתנות בעיצוב רומנטי, יוקרתי ונקי —
+            עם חוויית הזמנה פשוטה ומשלוחים מהירים.
+          </p>
 
-  <!-- Item 1 -->
-  <div class="showcase-grid" style="margin-bottom:6rem;">
-    <div class="showcase-visual reveal-right">
-      <div class="showcase-img-wrap">
-        <div class="showcase-img-placeholder">
-          <span class="flower-icon">🌹</span>
-          <p>תמונת זר כאן</p>
-        </div>
-      </div>
-      <div class="showcase-badge">
-        <strong>מהמכר #1</strong>
-        <span>החל מ-₪249</span>
-      </div>
-    </div>
-    <div class="showcase-text reveal-left">
-      <span class="showcase-num">01</span>
-      <h3>זר הוורדים הקלאסי</h3>
-      <p>ורדים אדומים משובחים, נלקטים בשיא פריחתם ומעוצבים בסגנון רומנטי נצחי. המתנה המושלמת לאהובים.</p>
-      <div class="showcase-tags">
-        <span class="showcase-tag">ורדים אדומים</span>
-        <span class="showcase-tag">רומנטי</span>
-        <span class="showcase-tag">קלאסי</span>
-      </div>
-    </div>
-  </div>
+          <div class="hero-buttons">
+            <a
+              class="btn btn-primary"
+              href="https://wa.me/972501234567?text=היי,%20אני%20רוצה%20להזמין%20זר%20פרחים"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              להזמין בוואטסאפ
+            </a>
 
-  <!-- Item 2 -->
-  <div class="showcase-grid reverse" style="margin-bottom:6rem;">
-    <div class="showcase-text reveal-right" style="order:2">
-      <span class="showcase-num">02</span>
-      <h3>זר הפאסטל המרהיב</h3>
-      <p>שילוב קסום של ורדים ורודים, אדמונות לבנות ואיריסים סגולים. עדין, נשי, ונעים לנשמה.</p>
-      <div class="showcase-tags">
-        <span class="showcase-tag">פסטל</span>
-        <span class="showcase-tag">נשי</span>
-        <span class="showcase-tag">מעורב</span>
-      </div>
-    </div>
-    <div class="showcase-visual reveal-left" style="order:1">
-      <div class="showcase-img-wrap">
-        <div class="showcase-img-placeholder">
-          <span class="flower-icon">🌸</span>
-          <p>תמונת זר כאן</p>
-        </div>
-      </div>
-      <div class="showcase-badge" style="left:-16px;right:auto;">
-        <strong>אהוב על הלקוחות</strong>
-        <span>החל מ-₪199</span>
-      </div>
-    </div>
-  </div>
+            <a class="btn btn-secondary" href="#categories">
+              לצפייה בזרים
+            </a>
+          </div>
 
-  <!-- Item 3 -->
-  <div class="showcase-grid">
-    <div class="showcase-visual reveal-right">
-      <div class="showcase-img-wrap">
-        <div class="showcase-img-placeholder">
-          <span class="flower-icon">🌺</span>
-          <p>תמונת זר כאן</p>
-        </div>
-      </div>
-      <div class="showcase-badge">
-        <strong>מהדורה מוגבלת</strong>
-        <span>החל מ-₪349</span>
-      </div>
-    </div>
-    <div class="showcase-text reveal-left">
-      <span class="showcase-num">03</span>
-      <h3>זר המותרות הפרמיום</h3>
-      <p>יצירה בלעדית משלבת פרחי יוקרה נדירים: לאוני, פיאוני ורנונקולוס. לרגעים שמגיעים לטוב ביותר.</p>
-      <div class="showcase-tags">
-        <span class="showcase-tag">פרמיום</span>
-        <span class="showcase-tag">נדיר</span>
-        <span class="showcase-tag">יוקרתי</span>
-      </div>
-    </div>
-  </div>
-</section>
+          <div class="hero-points">
+            <div class="point-card">
+              <strong>משלוח מהיום להיום</strong>
+              <span>זמינות מהירה באזורים נבחרים</span>
+            </div>
 
-<!-- ═══════ WHY US ═══════ -->
-<section class="why-us" id="why">
-  <div class="section-divider reveal">
-    <span></span><span class="rose">✦</span><span></span>
-  </div>
-  <p class="section-label reveal">למה אנחנו</p>
-  <h2 class="section-title reveal">הבחירה של אנשים שאוהבים אהבה</h2>
-  <p class="section-sub reveal">כי כשאתם שולחים פרחים, אתם שולחים חלק מעצמכם. אנחנו דואגים שהוא יגיע מושלם.</p>
+            <div class="point-card">
+              <strong>עיצוב יוקרתי</strong>
+              <span>מראה אלגנטי, נקי ומרגש</span>
+            </div>
 
-  <div class="why-grid">
-    <div class="why-card reveal">
-      <div class="why-icon">🌿</div>
-      <h3>פרחים טריים בלבד</h3>
-      <p>אנחנו מקבלים משלוחי פרחים טריים כל בוקר ישירות מהמשתלות. לעולם לא פרחים מיומש.</p>
-    </div>
-    <div class="why-card reveal" style="transition-delay:0.1s">
-      <div class="why-icon">✂️</div>
-      <h3>עיצוב ידני מקצועי</h3>
-      <p>כל זר מעוצב בידיים על ידי פרחנים מוסמכים עם שנים של ניסיון ואהבה אמיתית לאומנות.</p>
-    </div>
-    <div class="why-card reveal" style="transition-delay:0.2s">
-      <div class="why-icon">🚚</div>
-      <h3>משלוח ביום ההזמנה</h3>
-      <p>הזמנתם היום? יגיע היום. אנחנו מספקים משלוח מהיר לכל אזורי המרכז תוך 3-4 שעות.</p>
-    </div>
-    <div class="why-card reveal" style="transition-delay:0.3s">
-      <div class="why-icon">💬</div>
-      <h3>שירות אישי בוואטסאפ</h3>
-      <p>אנחנו כאן בשבילכם ישירות בוואטסאפ. שאלו, התייעצו, עצבו ביחד. שירות אמיתי מאנשים אמיתיים.</p>
-    </div>
-    <div class="why-card reveal" style="transition-delay:0.4s">
-      <div class="why-icon">🎀</div>
-      <h3>אריזה יוקרתית</h3>
-      <p>כל זר מגיע עטוף בנייר כבוד ואריזת מתנה יוקרתית, מוכן להפתיע בלי מאמץ מצידכם.</p>
-    </div>
-    <div class="why-card reveal" style="transition-delay:0.5s">
-      <div class="why-icon">⭐</div>
-      <h3>+4,200 לקוחות מרוצים</h3>
-      <p>הלקוחות שלנו חוזרים שוב ושוב. כי אצלנו מקבלים לא רק פרחים — מקבלים חוויה.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════ CATEGORIES ═══════ -->
-<section class="categories" id="categories">
-  <div class="section-divider reveal">
-    <span></span><span class="rose">✦</span><span></span>
-  </div>
-  <p class="section-label reveal">קטגוריות פופולריות</p>
-  <h2 class="section-title reveal">מצאו את הזר המושלם</h2>
-  <p class="section-sub reveal">לכל רגע יש את הזר שלו. בחרו קטגוריה ותנו לנו לעשות את השאר.</p>
-
-  <div class="cat-grid">
-    <div class="cat-card reveal" onclick="orderCategory('ורדים אדומים')">
-      <div class="cat-bg">🌹</div>
-      <div class="cat-overlay"></div>
-      <div class="cat-info">
-        <span class="cat-name">ורדים אדומים</span>
-        <span class="cat-count">12 זרים זמינים</span>
-      </div>
-      <div class="cat-arrow">←</div>
-    </div>
-    <div class="cat-card reveal" style="transition-delay:0.1s" onclick="orderCategory('פסטל')">
-      <div class="cat-bg">🌸</div>
-      <div class="cat-overlay"></div>
-      <div class="cat-info">
-        <span class="cat-name">זרי פסטל</span>
-        <span class="cat-count">8 זרים זמינים</span>
-      </div>
-      <div class="cat-arrow">←</div>
-    </div>
-    <div class="cat-card reveal" style="transition-delay:0.2s" onclick="orderCategory('חתונות')">
-      <div class="cat-bg">💐</div>
-      <div class="cat-overlay"></div>
-      <div class="cat-info">
-        <span class="cat-name">חתונות ואירועים</span>
-        <span class="cat-count">עיצוב אישי</span>
-      </div>
-      <div class="cat-arrow">←</div>
-    </div>
-    <div class="cat-card reveal" style="transition-delay:0.3s" onclick="orderCategory('צמחי בית')">
-      <div class="cat-bg">🌿</div>
-      <div class="cat-overlay"></div>
-      <div class="cat-info">
-        <span class="cat-name">צמחי בית</span>
-        <span class="cat-count">15 סוגים</span>
-      </div>
-      <div class="cat-arrow">←</div>
-    </div>
-    <div class="cat-card reveal" style="transition-delay:0.4s" onclick="orderCategory('יום הולדת')">
-      <div class="cat-bg">🎂</div>
-      <div class="cat-overlay"></div>
-      <div class="cat-info">
-        <span class="cat-name">יום הולדת</span>
-        <span class="cat-count">מארזים מיוחדים</span>
-      </div>
-      <div class="cat-arrow">←</div>
-    </div>
-    <div class="cat-card reveal" style="transition-delay:0.5s" onclick="orderCategory('פרמיום')">
-      <div class="cat-bg">👑</div>
-      <div class="cat-overlay"></div>
-      <div class="cat-info">
-        <span class="cat-name">קולקציית פרמיום</span>
-        <span class="cat-count">מהדורות מוגבלות</span>
-      </div>
-      <div class="cat-arrow">←</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════ DELIVERY ═══════ -->
-<section class="delivery" id="delivery">
-  <div class="delivery-inner">
-    <div class="delivery-text reveal-right">
-      <p class="section-label" style="text-align:right;color:rgba(255,255,255,0.5);margin-bottom:0.6rem;">משלוחים</p>
-      <h2>הזמינו עכשיו,<br><em>יגיע היום</em></h2>
-      <p>אנחנו יודעים שרגעים לא ממתינים. לכן הקמנו מערכת משלוחים מהירה שמבטיחה שהפרחים יגיעו טריים ובזמן, כל פעם.</p>
-
-      <div class="delivery-features">
-        <div class="delivery-feature">
-          <div class="delivery-feature-icon">⏰</div>
-          <div class="delivery-feature-text">
-            <strong>משלוח תוך 3 שעות</strong>
-            <span>להזמנות עד השעה 15:00</span>
+            <div class="point-card">
+              <strong>שירות אישי</strong>
+              <span>התאמה מדויקת לכל אירוע</span>
+            </div>
           </div>
         </div>
-        <div class="delivery-feature">
-          <div class="delivery-feature-icon">📍</div>
-          <div class="delivery-feature-text">
-            <strong>כל אזורי המרכז</strong>
-            <span>תל אביב, גוש דן, שרון ושפלה</span>
-          </div>
-        </div>
-        <div class="delivery-feature">
-          <div class="delivery-feature-icon">🌡️</div>
-          <div class="delivery-feature-text">
-            <strong>שמירה על הטריות</strong>
-            <span>משלוח ברכב ממוזג עם מים</span>
-          </div>
-        </div>
-        <div class="delivery-feature">
-          <div class="delivery-feature-icon">💳</div>
-          <div class="delivery-feature-text">
-            <strong>תשלום בקבלה</strong>
-            <span>כרטיס אשראי, מזומן או ביט</span>
+
+        <div class="hero-visual reveal delay-1">
+          <div class="hero-glow glow-1"></div>
+          <div class="hero-glow glow-2"></div>
+
+          <div class="hero-media-frame">
+            <!-- כדי להחליף אחר כך לוידאו:
+            <video class="hero-media" autoplay muted loop playsinline>
+              <source src="assets/bouquet-hero.mp4" type="video/mp4" />
+            </video>
+            -->
+            <img
+              class="hero-media"
+              src="https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?auto=format&fit=crop&w=1200&q=80"
+              alt="זר פרחים יוקרתי"
+            />
           </div>
         </div>
       </div>
+    </section>
 
-      <a href="https://wa.me/972506286548" target="_blank" class="btn-white">
-        🚚 הזמינו משלוח
-      </a>
-    </div>
+    <section class="showcase" id="showcase">
+      <div class="showcase-sticky">
+        <div class="container showcase-grid">
+          <div class="showcase-visual reveal">
+            <div class="showcase-stack">
+              <img
+                class="bouquet-base"
+                src="https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?auto=format&fit=crop&w=1200&q=80"
+                alt="זר סגור"
+              />
+              <img
+                class="bouquet-overlay"
+                id="bouquetOverlay"
+                src="https://images.unsplash.com/photo-1520763185298-1b434c919102?auto=format&fit=crop&w=1200&q=80"
+                alt="זר פתוח"
+              />
+            </div>
+          </div>
 
-    <div class="delivery-card reveal-left">
-      <h4 style="font-family:'Cormorant Garamond',serif;color:white;font-size:1.2rem;font-weight:600;margin-bottom:1rem;">
-        איך זה עובד?
-      </h4>
-      <div class="delivery-step">
-        <span class="delivery-step-num">01</span>
-        <div class="delivery-step-content">
-          <strong>שלחו לנו הודעה בוואטסאפ</strong>
-          <span>ספרו לנו מה אתם מחפשים ומתי</span>
+          <div class="showcase-copy">
+            <div class="showcase-step reveal" data-progress="0.15">
+              <p class="eyebrow">תצוגת סקרול</p>
+              <h2>הזר נפתח תוך כדי גלילה</h2>
+              <p>
+                האזור הזה בנוי כך שתוכל להחליף אחר כך את התמונות בוידאו אמיתי
+                של מעבר בין זר סגור לזר פתוח.
+              </p>
+            </div>
+
+            <div class="showcase-step reveal" data-progress="0.45">
+              <h3>מראה יותר חי, יותר עשיר</h3>
+              <p>
+                בזמן שהמשתמש גולל, התמונה העליונה נחשפת בהדרגה ויוצרת תחושת
+                תנועה יוקרתית סביב המוצר.
+              </p>
+            </div>
+
+            <div class="showcase-step reveal" data-progress="0.75">
+              <h3>מוכן להחלפה לוידאו</h3>
+              <p>
+                ברגע שיהיה לך קובץ וידאו, פשוט מחליפים את אזור המדיה בלי לשבור
+                את המבנה של העמוד.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="delivery-step-line"></div>
-      <div class="delivery-step">
-        <span class="delivery-step-num">02</span>
-        <div class="delivery-step-content">
-          <strong>נעצב את הזר שלכם</strong>
-          <span>בהתאמה אישית לבקשה ולתקציב</span>
+    </section>
+
+    <section class="section soft-section" id="why-us">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">למה לבחור בנו</p>
+          <h2>לא רק זר. חוויה שנראית טוב בכל פרט</h2>
+          <p>
+            המטרה של האתר היא לגרום לעסק להיראות פרימיום, רגשי ונקי — בלי עומס,
+            בלי בלגן ועם היררכיה חזקה.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature-card reveal">
+            <div class="feature-icon">❤</div>
+            <h3>רומנטי ומדויק</h3>
+            <p>שפה ויזואלית רכה, יוקרתית ונשית עם מיקוד בפרחים עצמם.</p>
+          </article>
+
+          <article class="feature-card reveal delay-1">
+            <div class="feature-icon">✦</div>
+            <h3>מראה יוקרתי</h3>
+            <p>ריווחים נכונים, צבעים נקיים וטיפוגרפיה שקוראת כמו מותג פרימיום.</p>
+          </article>
+
+          <article class="feature-card reveal delay-2">
+            <div class="feature-icon">⚡</div>
+            <h3>הזמנה מהירה</h3>
+            <p>וואטסאפ בולט, CTA ברור ומבנה שמוביל להזמנה בלי חיכוך.</p>
+          </article>
         </div>
       </div>
-      <div class="delivery-step-line"></div>
-      <div class="delivery-step">
-        <span class="delivery-step-num">03</span>
-        <div class="delivery-step-content">
-          <strong>יוצאים למשלוח</strong>
-          <span>תעדכון ב-SMS עם זמן הגעה משוער</span>
+    </section>
+
+    <section class="section" id="categories">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">קטגוריות פופולריות</p>
+          <h2>זרים שנבנו כדי להרשים</h2>
+          <p>
+            מבחר קטגוריות מרכזיות שאפשר להחליף אחר כך למוצרים אמיתיים מתוך העסק.
+          </p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="product-card reveal">
+            <div class="product-image-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1520763185298-1b434c919102?auto=format&fit=crop&w=1000&q=80"
+                alt="זר ורדים אדומים"
+              />
+            </div>
+            <div class="product-content">
+              <h3>זר ורדים אדומים</h3>
+              <p>בחירה רומנטית, עמוקה ויוקרתית.</p>
+              <div class="product-footer">
+                <span>החל מ־249₪</span>
+                <a
+                  href="https://wa.me/972501234567?text=היי,%20אני%20רוצה%20זר%20ורדים%20אדומים"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  להזמנה
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card reveal delay-1">
+            <div class="product-image-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1468327768560-75b778cbb551?auto=format&fit=crop&w=1000&q=80"
+                alt="זר לבן אלגנטי"
+              />
+            </div>
+            <div class="product-content">
+              <h3>זר לבן אלגנטי</h3>
+              <p>עדין, חגיגי ומתאים לרגעים מרגשים.</p>
+              <div class="product-footer">
+                <span>החל מ־219₪</span>
+                <a
+                  href="https://wa.me/972501234567?text=היי,%20אני%20רוצה%20זר%20לבן%20אלגנטי"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  להזמנה
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card reveal delay-2">
+            <div class="product-image-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=1000&q=80"
+                alt="זר ורוד יוקרתי"
+              />
+            </div>
+            <div class="product-content">
+              <h3>זר ורוד יוקרתי</h3>
+              <p>נפח עשיר, מראה רך ותחושת פרימיום.</p>
+              <div class="product-footer">
+                <span>החל מ־269₪</span>
+                <a
+                  href="https://wa.me/972501234567?text=היי,%20אני%20רוצה%20זר%20ורוד%20יוקרתי"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  להזמנה
+                </a>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
-      <div class="delivery-step-line"></div>
-      <div class="delivery-step">
-        <span class="delivery-step-num">04</span>
-        <div class="delivery-step-content">
-          <strong>הגיע! 🌹</strong>
-          <span>פרחים טריים על הסף שלכם</span>
+    </section>
+
+    <section class="section soft-section" id="delivery">
+      <div class="container delivery-grid">
+        <div class="delivery-copy reveal">
+          <p class="eyebrow">משלוחים ושירות</p>
+          <h2>הזמנה פשוטה. תוצאה מרשימה.</h2>
+          <p>
+            שולחים הודעה, בוחרים סגנון, מקבלים אישור ואנחנו דואגים להכנה,
+            לאריזה ולמשלוח.
+          </p>
+
+          <ul class="delivery-list">
+            <li>משלוחים מהיום להיום באזורים נבחרים</li>
+            <li>אפשרות לברכה אישית</li>
+            <li>התאמה אישית לפי תקציב וסגנון</li>
+          </ul>
+
+          <a
+            class="btn btn-primary"
+            href="https://wa.me/972501234567?text=היי,%20אני%20רוצה%20לבצע%20הזמנה"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            שלחו לי בוואטסאפ
+          </a>
+        </div>
+
+        <div class="delivery-card reveal delay-1">
+          <h3>איך זה עובד</h3>
+
+          <div class="steps">
+            <div class="step">
+              <span>01</span>
+              <p>בוחרים סגנון או שולחים תמונה להשראה</p>
+            </div>
+
+            <div class="step">
+              <span>02</span>
+              <p>מקבלים מחיר והתאמה מהירה לפי אירוע</p>
+            </div>
+
+            <div class="step">
+              <span>03</span>
+              <p>אנחנו מכינים, אורזים ושולחים</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ═══════ GALLERY ═══════ -->
-<section class="gallery" id="gallery">
-  <div class="section-divider reveal">
-    <span></span><span class="rose">✦</span><span></span>
-  </div>
-  <p class="section-label reveal">גלריה</p>
-  <h2 class="section-title reveal">הרגעים שיצרנו</h2>
-  <p class="section-sub reveal">כל תמונה מספרת סיפור. כל זר — רגש אמיתי.</p>
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">גלריה</p>
+          <h2>כמה דוגמאות מהסגנון שלנו</h2>
+        </div>
 
-  <div class="gallery-masonry">
-    <div class="gallery-item tall reveal">
-      <div class="gallery-inner" style="background:linear-gradient(135deg,#f5e0e0,#fdf8f3);">🌹</div>
-      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-    </div>
-    <div class="gallery-item reveal" style="transition-delay:0.1s">
-      <div class="gallery-inner" style="background:linear-gradient(135deg,#fce8ef,#f5ede4);">🌸</div>
-      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-    </div>
-    <div class="gallery-item reveal" style="transition-delay:0.2s">
-      <div class="gallery-inner" style="background:linear-gradient(135deg,#e8f5e0,#f3fdf8);">🌿</div>
-      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-    </div>
-    <div class="gallery-item tall reveal" style="transition-delay:0.3s">
-      <div class="gallery-inner" style="background:linear-gradient(135deg,#f0e8f5,#fdf3fb);">💐</div>
-      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-    </div>
-    <div class="gallery-item wide reveal" style="transition-delay:0.1s">
-      <div class="gallery-inner" style="background:linear-gradient(135deg,#f5e8e0,#fdf5f0);">🌺</div>
-      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-    </div>
-    <div class="gallery-item reveal" style="transition-delay:0.2s">
-      <div class="gallery-inner" style="background:linear-gradient(135deg,#fef0e0,#fdfaf3);">🌻</div>
-      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-    </div>
-    <div class="gallery-item reveal" style="transition-delay:0.3s">
-      <div class="gallery-inner" style="background:linear-gradient(135deg,#e0e8f5,#f0f3fd);">💮</div>
-      <div class="gallery-overlay"><span class="gallery-overlay-icon">🔍</span></div>
-    </div>
-  </div>
-</section>
+        <div class="gallery-grid">
+          <div class="gallery-item reveal">
+            <img
+              src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=1000&q=80"
+              alt="גלריית פרחים 1"
+            />
+          </div>
 
-<!-- ═══════ WHATSAPP CTA ═══════ -->
-<section class="wa-section" id="order">
-  <p class="section-label" style="color:rgba(255,255,255,0.4);margin-bottom:0.6rem;" data-reveal>הזמנה</p>
-  <h2 class="wa-title reveal">
-    מוכנים להפתיע?<br>
-    <em>אנחנו מוכנים בשבילכם.</em>
-  </h2>
-  <p class="wa-sub reveal">
-    שלחו הודעה בוואטסאפ ותקבלו מענה אישי תוך דקות. 
-    ביחד נמצא את הזר המושלם לרגע המיוחד שלכם.
-  </p>
+          <div class="gallery-item reveal delay-1">
+            <img
+              src="https://images.unsplash.com/photo-1462275646964-a0e3386b89fa?auto=format&fit=crop&w=1000&q=80"
+              alt="גלריית פרחים 2"
+            />
+          </div>
 
-  <a href="https://wa.me/972506286548?text=היי!%20רוצה%20להזמין%20זר%20🌹" 
-     target="_blank" class="btn-whatsapp reveal">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-    </svg>
-    שלחו לנו הודעה עכשיו
+          <div class="gallery-item reveal delay-2">
+            <img
+              src="https://images.unsplash.com/photo-1455656678494-4d1b5f3e7ad1?auto=format&fit=crop&w=1000&q=80"
+              alt="גלריית פרחים 3"
+            />
+          </div>
+
+          <div class="gallery-item reveal">
+            <img
+              src="https://images.unsplash.com/photo-1494336934272-fd663dfc6cb1?auto=format&fit=crop&w=1000&q=80"
+              alt="גלריית פרחים 4"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" id="contact">
+      <div class="container">
+        <div class="cta-box reveal">
+          <p class="eyebrow">הזמנה בוואטסאפ</p>
+          <h2>שלחו הודעה ונרכיב לכם זר שנראה בדיוק כמו שצריך</h2>
+          <p>
+            בלי טפסים מסובכים. בלי בלגן. פשוט שולחים הודעה ומתקדמים.
+          </p>
+          <a
+            class="btn btn-primary"
+            href="https://wa.me/972501234567?text=היי,%20אני%20רוצה%20להזמין%20זר%20פרחים"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            להזמנה עכשיו
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>Bloom Rouge</h3>
+        <p>
+          חנות פרחים עם זרים יוקרתיים, שפה רומנטית ומשלוחים מהירים.
+        </p>
+      </div>
+
+      <div>
+        <h4>ניווט מהיר</h4>
+        <a href="#showcase">הזר המרכזי</a>
+        <a href="#why-us">למה אנחנו</a>
+        <a href="#categories">קטגוריות</a>
+        <a href="#gallery">גלריה</a>
+      </div>
+    </div>
+  </footer>
+
+  <a
+    class="whatsapp-float"
+    href="https://wa.me/972501234567?text=היי,%20אני%20רוצה%20להזמין%20זר%20פרחים"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="הזמנה בוואטסאפ"
+  >
+    ✆
   </a>
 
-  <div class="wa-trust reveal">
-    <div class="wa-trust-item"><span>✅</span><span>תגובה תוך 5 דקות</span></div>
-    <div class="wa-trust-item"><span>✅</span><span>ללא התחייבות</span></div>
-    <div class="wa-trust-item"><span>✅</span><span>ייעוץ חינם</span></div>
-    <div class="wa-trust-item"><span>✅</span><span>+4,200 לקוחות מרוצים</span></div>
-  </div>
-</section>
-
-<!-- ═══════ FOOTER ═══════ -->
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div class="footer-logo">פרחי<span>גן עדן</span></div>
-      <p>אנחנו מאמינים שפרחים הם שפה אוניברסלית של אהבה. כבר מעל 10 שנים אנחנו מחברים בין לבבות עם זרים יוקרתיים.</p>
-      <div class="footer-social">
-        <a href="#" aria-label="Instagram">📷</a>
-        <a href="#" aria-label="Facebook">📘</a>
-        <a href="https://wa.me/972506286548" aria-label="WhatsApp">💬</a>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h4>ניווט מהיר</h4>
-      <ul>
-        <li><a href="#showcase">הקולקציה</a></li>
-        <li><a href="#categories">קטגוריות</a></li>
-        <li><a href="#delivery">משלוחים</a></li>
-        <li><a href="#gallery">גלריה</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>שירותים</h4>
-      <ul>
-        <li><a href="#">זרים לאירועים</a></li>
-        <li><a href="#">קישוטי חתונות</a></li>
-        <li><a href="#">מנויי פרחים</a></li>
-        <li><a href="#">עיצוב אישי</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>צרו קשר</h4>
-      <ul>
-        <li><a href="https://wa.me/972506286548">💬 050-628-6548</a></li>
-        <li><a href="mailto:hello@florist.co.il">📧 hello@florist.co.il</a></li>
-        <li><a href="#">📍 תל אביב, ישראל</a></li>
-        <li><a href="#">🕐 א-ה 08:00-20:00</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2025 פרחי גן עדן. כל הזכויות שמורות.</p>
-    <p>עוצב ופותח במסירות 🌹</p>
-  </div>
-</footer>
-
-<!-- ═══════ STICKY WHATSAPP ═══════ -->
-<a href="https://wa.me/972506286548?text=היי!%20רוצה%20לדעת%20יותר%20על%20הזרים%20שלכם%20🌹" 
-   target="_blank" class="wa-sticky" aria-label="WhatsApp">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-  </svg>
-  <span class="wa-tooltip">הזמינו בוואטסאפ!</span>
-</a>
-
-<!-- Toast -->
-<div class="toast" id="toast"></div>
-
-<!-- ═══════ SCRIPTS ═══════ -->
-<script>
-// ── NAV SCROLL ──
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-});
-
-// ── HAMBURGER ──
-function toggleMenu() {
-  const menu = document.getElementById('mobileMenu');
-  const ham  = document.getElementById('hamburger');
-  menu.classList.toggle('open');
-  ham.classList.toggle('open');
-}
-
-// ── REVEAL ON SCROLL ──
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal, .reveal-left, .reveal-right')
-  .forEach(el => revealObserver.observe(el));
-
-// ── HERO ENTRANCE ANIMATIONS ──
-window.addEventListener('load', () => {
-  const eyebrow = document.getElementById('heroEyebrow');
-  const title   = document.getElementById('heroTitle');
-  const sub     = document.getElementById('heroSub');
-  const actions = document.getElementById('heroActions');
-  const stats   = document.getElementById('heroStats');
-
-  setTimeout(() => animate(eyebrow), 200);
-  setTimeout(() => animate(title),   500);
-  setTimeout(() => animate(sub),     800);
-  setTimeout(() => animate(actions), 1000);
-  setTimeout(() => animate(stats),   1200);
-
-  function animate(el) {
-    if (!el) return;
-    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-    el.style.opacity = '1';
-    el.style.transform = 'translateY(0)';
-  }
-});
-
-// ── CATEGORY ORDER ──
-function orderCategory(cat) {
-  const msg = encodeURIComponent(`היי! אני מעוניין/ת בזר מקטגוריית "${cat}" 🌹`);
-  window.open('https://wa.me/972506286548?text=' + msg, '_blank');
-}
-
-// ── TOAST ──
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
-}
-
-// ── GSAP SCROLL ANIMATIONS (if loaded) ──
-if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-
-  // Showcase items parallax
-  gsap.utils.toArray('.showcase-visual').forEach((el, i) => {
-    gsap.fromTo(el,
-      { y: 60, opacity: 0 },
-      {
-        y: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 80%', once: true }
-      }
-    );
-  });
-
-  // Gallery stagger
-  gsap.utils.toArray('.gallery-item').forEach((el, i) => {
-    gsap.fromTo(el,
-      { scale: 0.9, opacity: 0 },
-      {
-        scale: 1, opacity: 1, duration: 0.7, ease: 'back.out(1.4)',
-        delay: i * 0.07,
-        scrollTrigger: { trigger: '.gallery-masonry', start: 'top 75%', once: true }
-      }
-    );
-  });
-
-  // Why cards stagger
-  gsap.utils.toArray('.why-card').forEach((el, i) => {
-    gsap.fromTo(el,
-      { y: 40, opacity: 0 },
-      {
-        y: 0, opacity: 1, duration: 0.7, ease: 'power2.out',
-        delay: i * 0.1,
-        scrollTrigger: { trigger: '.why-grid', start: 'top 78%', once: true }
-      }
-    );
-  });
-}
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
