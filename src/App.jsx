@@ -13,7 +13,7 @@ import {
   products,
   stats,
   whatsappBase
-} from "./data";
+} from "./data.js";
 
 function App() {
   useScrollToTop();
