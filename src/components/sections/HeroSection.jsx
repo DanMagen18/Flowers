@@ -12,7 +12,7 @@ function HeroSection() {
       <div className="hero-background">
         <div className="hero-overlay"></div>
         <img
-          src="https://images.pexels.com/photos/1070862/pexels-photo-1070862.jpeg"
+          src="/image.png"
           alt="פרחים יוקרתיים"
           className="hero-image"
         />

@@ -42,7 +42,7 @@ function AboutPage() {
             </div>
             <div className="about-image">
               <img
-                src="https://images.pexels.com/photos/1070862/pexels-photo-1070862.jpeg"
+                src="/image.png"
                 alt="הסטודיו שלנו"
               />
             </div>

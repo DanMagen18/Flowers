@@ -30,7 +30,7 @@ export const siteData = {
       fullDescription: 'זר פרחים מרהיב המשלב ורדים אדומים עמוקים עם ירוק כהה, יוצר אווירה רומנטית ודרמטית. כל ורד נבחר בקפידה ומסודר בצורה אומנותית שמביאה את היופי הטבעי לידי ביטוי מקסימלי.',
       price: '₪450',
       category: 'רומנטיקה',
-      image: 'https://images.pexels.com/photos/1812464/pexels-photo-1812464.jpeg',
+      image: '/image.png',
       featured: true,
       bullets: [
         'ורדים אדומים פרימיום מובחרים',
@@ -47,7 +47,7 @@ export const siteData = {
       fullDescription: 'זר עדין ומתוחכם המשלב פרחים לבנים וורודים בהרמונה מושלמת. מושלם לאירועים מיוחדים או כמתנה יוקרתית המבטאת טעם מעודן.',
       price: '₪380',
       category: 'אלגנטיות',
-      image: 'https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg',
+      image: '/image.png',
       featured: true,
       bullets: [
         'פרחים עונתיים טריים',
@@ -64,7 +64,7 @@ export const siteData = {
       fullDescription: 'זר מרהיב המשלב פרחים בגוונים חמים של כתום, צהוב וורוד, מעורר תחושה של שמחה ואופטימיות. מושלם להעברת מסר של אהבה ושמחת חיים.',
       price: '₪420',
       category: 'שמחה',
-      image: 'https://images.pexels.com/photos/1458694/pexels-photo-1458694.jpeg',
+      image: '/image.png',
       featured: true,
       bullets: [
         'גוונים חמים ומזמינים',
@@ -81,7 +81,7 @@ export const siteData = {
       shortDescription: 'פרחים לבנים טהורים בעיצוב מינימליסטי מרהיב',
       price: '₪480',
       category: 'יוקרה',
-      image: 'https://images.pexels.com/photos/1450082/pexels-photo-1450082.jpeg',
+      image: '/image.png',
       featured: false,
       bullets: [
         'פרחים לבנים פרימיום',
@@ -98,7 +98,7 @@ export const siteData = {
       fullDescription: 'שילוב ייחודי של פרחים סגולים ורודים עם ירוק עשיר, יוצר אווירה מיסטית ורומנטית. מושלם למי שמחפש משהו שונה ומיוחד במיוחד.',
       price: '₪410',
       category: 'ייחודי',
-      image: 'https://images.pexels.com/photos/1382734/pexels-photo-1382734.jpeg',
+      image: '/image.png',
       featured: false,
       bullets: [
         'גוונים ייחודיים ועמוקים',
@@ -115,7 +115,7 @@ export const siteData = {
       fullDescription: 'זר מרהיב המשלב מגוון רחב של פרחי אביב בצבעים עזים ושמחים. מביא את ריח ויופי האביב ישירות לביתכם.',
       price: '₪390',
       category: 'עונתי',
-      image: 'https://images.pexels.com/photos/1488459/pexels-photo-1488459.jpeg',
+      image: '/image.png',
       featured: false,
       bullets: [
         'מגוון פרחי אביב טריים',
@@ -132,7 +132,7 @@ export const siteData = {
       fullDescription: 'זר ורדים אדומים קלאסי המבטא אהבה, תשוקה ורומנטיקה. הבחירה המושלמת להבעת רגשות עמוקים ואמיתיים.',
       price: '₪360',
       category: 'קלאסי',
-      image: 'https://images.pexels.com/photos/1868704/pexels-photo-1868704.jpeg',
+      image: '/image.png',
       featured: false,
       bullets: [
         'ורדים אדומים איכותיים',
@@ -149,7 +149,7 @@ export const siteData = {
       fullDescription: 'זר ייחודי בסגנון בוהמייני המשלב פרחי שדה, עשבי תיבול ופרחים טבעיים בעיצוב חופשי ופראי. מושלם למי שמחפש משהו אחר.',
       price: '₪340',
       category: 'בוהמייני',
-      image: 'https://images.pexels.com/photos/1414042/pexels-photo-1414042.jpeg',
+      image: '/image.png',
       featured: false,
       bullets: [
         'סגנון בוהמייני חופשי',
@@ -186,27 +186,27 @@ export const siteData = {
 
   gallery: [
     {
-      image: 'https://images.pexels.com/photos/1191710/pexels-photo-1191710.jpeg',
+      image: '/image.png',
       alt: 'זר פרחים אלגנטי'
     },
     {
-      image: 'https://images.pexels.com/photos/1408221/pexels-photo-1408221.jpeg',
+      image: '/image.png',
       alt: 'פרחים ורודים עדינים'
     },
     {
-      image: 'https://images.pexels.com/photos/1166990/pexels-photo-1166990.jpeg',
+      image: '/image.png',
       alt: 'זר פרחים לבן'
     },
     {
-      image: 'https://images.pexels.com/photos/1854665/pexels-photo-1854665.jpeg',
+      image: '/image.png',
       alt: 'זר פרחים צבעוני'
     },
     {
-      image: 'https://images.pexels.com/photos/931162/pexels-photo-931162.jpeg',
+      image: '/image.png',
       alt: 'ורדים אדומים'
     },
     {
-      image: 'https://images.pexels.com/photos/1070862/pexels-photo-1070862.jpeg',
+      image: '/image.png',
       alt: 'זר פרחים עונתי'
     }
   ],
